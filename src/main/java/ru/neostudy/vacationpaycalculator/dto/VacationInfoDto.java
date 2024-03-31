@@ -6,12 +6,14 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
-import ru.neostudy.vacationpaycalculator.validation.HasStartEndDate;
+import ru.neostudy.vacationpaycalculator.validation.DaysAmountValid;
+import ru.neostudy.vacationpaycalculator.validation.HasDatesInfo;
 import ru.neostudy.vacationpaycalculator.validation.StartBeforeEndDateValid;
 
 @Data
 @StartBeforeEndDateValid
-public class VacationInfoDto implements HasStartEndDate {
+@DaysAmountValid
+public class VacationInfoDto implements HasDatesInfo {
     @Positive
     private double averageSalary;
     @Positive

@@ -12,11 +12,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = StartBeforeEndDateValidator.class)
+@Constraint(validatedBy = DaysAmountValidator.class)
 @Documented
-public @interface StartBeforeEndDateValid {
+public @interface DaysAmountValid {
 
-    String message() default "{Start day must be before end day}";
+    String message() default "{There must be a transmitted vacation days amount between the start and end dates}";
 
     Class<?>[] groups() default {};
 

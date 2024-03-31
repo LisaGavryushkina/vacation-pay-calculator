@@ -1,20 +1,21 @@
 package ru.neostudy.vacationpaycalculator.controller;
 
-import java.time.LocalDateTime;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neostudy.vacationpaycalculator.dto.VacationInfoDto;
+import ru.neostudy.vacationpaycalculator.service.VacationPayService;
 
 @RestController
 @RequestMapping("/vacation-pay")
+@RequiredArgsConstructor
 public class VacationPayController {
+    private final VacationPayService vacationPayService;
 
     @GetMapping("/calculate")
     public double calculateVacationPay(@RequestBody VacationInfoDto vacationInfoDto) {
-        return 0.0;
+        return vacationPayService.getVacationPay(vacationInfoDto);
     }
 }
