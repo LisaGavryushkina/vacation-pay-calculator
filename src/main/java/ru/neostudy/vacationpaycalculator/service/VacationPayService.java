@@ -12,9 +12,9 @@ public class VacationPayService {
 
     public double getVacationPay(VacationInfoDto vacationInfoDto) {
         LocalDate startDate = vacationInfoDto.getStartDate();
-        LocalDate endDate = vacationInfoDto.getEndDate();
         int daysAmount = vacationInfoDto.getDaysAmount();
-        if (startDate != null && endDate != null) {
+        if (startDate != null) {
+            LocalDate endDate = startDate.plusDays(daysAmount - 1);
             daysAmount -= getHolidaysAmount(startDate, endDate);
         }
         return calculate(vacationInfoDto.getAverageSalary(), daysAmount);
