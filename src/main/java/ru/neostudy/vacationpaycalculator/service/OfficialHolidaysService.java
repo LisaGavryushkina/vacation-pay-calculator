@@ -1,31 +1,27 @@
 package ru.neostudy.vacationpaycalculator.service;
 
-import java.time.LocalDate;
 import java.time.Month;
-import java.util.HashSet;
 import java.util.Set;
 
-import lombok.Getter;
 import org.springframework.stereotype.Service;
+import ru.neostudy.vacationpaycalculator.model.Date;
 
 @Service
-@Getter
 public class OfficialHolidaysService {
-    private final Set<LocalDate> officialHolidays;
+    public final static Set<Date> OFFICIAL_HOLIDAYS = Set.of(
+            new Date(Month.JANUARY, 1),
+            new Date(Month.JANUARY, 2),
+            new Date(Month.JANUARY, 3),
+            new Date(Month.JANUARY, 4),
+            new Date(Month.JANUARY, 5),
+            new Date(Month.JANUARY, 6),
+            new Date(Month.JANUARY, 7),
+            new Date(Month.JANUARY, 8),
+            new Date(Month.FEBRUARY, 23),
+            new Date(Month.MARCH, 8),
+            new Date(Month.MAY, 1),
+            new Date(Month.MAY, 9),
+            new Date(Month.JUNE, 12),
+            new Date(Month.NOVEMBER, 4));
 
-    public OfficialHolidaysService(int year) {
-        officialHolidays = new HashSet<>();
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 1));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 2));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 3));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 4));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 5));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 6));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 7));
-        officialHolidays.add(LocalDate.of(year, Month.JANUARY, 8));
-        officialHolidays.add(LocalDate.of(year, Month.FEBRUARY, 23));
-        officialHolidays.add(LocalDate.of(year, Month.MARCH, 8));
-        officialHolidays.add(LocalDate.of(year, Month.MAY, 1));
-        officialHolidays.add(LocalDate.of(year, Month.MAY, 9));
-    }
 }

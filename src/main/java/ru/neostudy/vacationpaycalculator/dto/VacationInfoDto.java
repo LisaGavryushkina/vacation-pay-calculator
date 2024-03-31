@@ -2,9 +2,10 @@ package ru.neostudy.vacationpaycalculator.dto;
 
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Positive;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Positive;
+
 import lombok.Data;
 import ru.neostudy.vacationpaycalculator.validation.DaysAmountValid;
 import ru.neostudy.vacationpaycalculator.validation.HasDatesInfo;

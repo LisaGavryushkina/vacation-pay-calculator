@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 import ru.neostudy.vacationpaycalculator.dto.VacationInfoDto;
+import ru.neostudy.vacationpaycalculator.model.Date;
 
 @Service
 public class VacationPayService {
@@ -14,20 +15,19 @@ public class VacationPayService {
         LocalDate endDate = vacationInfoDto.getEndDate();
         int daysAmount = vacationInfoDto.getDaysAmount();
         if (startDate != null && endDate != null) {
-            daysAmount = getDaysAmountWithoutHolidays(startDate, endDate, daysAmount);
+            daysAmount -= getHolidaysAmount(startDate, endDate);
         }
         return calculate(vacationInfoDto.getAverageSalary(), daysAmount);
     }
 
-    private int getDaysAmountWithoutHolidays(LocalDate startDate, LocalDate endDate, int daysAmount) {
-        OfficialHolidaysService officialHolidaysService = new OfficialHolidaysService(startDate.getYear());
-        for (LocalDate date : officialHolidaysService.getOfficialHolidays()) {
-            if (date.isEqual(startDate) || date.isEqual(endDate) ||
-                    date.isAfter(startDate) && date.isBefore(endDate)) {
-                daysAmount--;
+    private int getHolidaysAmount(LocalDate startDate, LocalDate endDate) {
+        int holidaysAmount = 0;
+        for (LocalDate day = startDate; !day.isAfter(endDate); day = day.plusDays(1)) {
+            if (OfficialHolidaysService.OFFICIAL_HOLIDAYS.contains(new Date(day))) {
+                holidaysAmount++;
             }
         }
-        return daysAmount;
+        return holidaysAmount;
     }
 
     private double calculate(double averageSalary, int daysAmount) {
