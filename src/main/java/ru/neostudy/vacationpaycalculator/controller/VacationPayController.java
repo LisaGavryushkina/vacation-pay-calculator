@@ -1,5 +1,9 @@
 package ru.neostudy.vacationpaycalculator.controller;
 
+import java.math.BigDecimal;
+
+import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +19,7 @@ public class VacationPayController {
     private final VacationPayService vacationPayService;
 
     @GetMapping("/calculate")
-    public double calculateVacationPay(@RequestBody VacationInfoDto vacationInfoDto) {
+    public BigDecimal calculateVacationPay(@RequestBody @Valid VacationInfoDto vacationInfoDto) {
         return vacationPayService.getVacationPay(vacationInfoDto);
     }
 }

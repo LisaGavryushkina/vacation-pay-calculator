@@ -1,5 +1,7 @@
 package ru.neostudy.vacationpaycalculator.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
@@ -8,9 +10,9 @@ import ru.neostudy.vacationpaycalculator.model.Date;
 
 @Service
 public class VacationPayService {
-    private static final double AVERAGE_DAYS_IN_MONTH = 29.3;
+    private static final BigDecimal AVERAGE_DAYS_IN_MONTH = new BigDecimal("29.3");
 
-    public double getVacationPay(VacationInfoDto vacationInfoDto) {
+    public BigDecimal getVacationPay(VacationInfoDto vacationInfoDto) {
         LocalDate startDate = vacationInfoDto.getStartDate();
         int daysAmount = vacationInfoDto.getDaysAmount();
         if (startDate != null) {
@@ -30,8 +32,10 @@ public class VacationPayService {
         return holidaysAmount;
     }
 
-    private double calculate(double averageSalary, int daysAmount) {
-        return averageSalary / AVERAGE_DAYS_IN_MONTH * daysAmount;
+    private BigDecimal calculate(BigDecimal averageSalary, int daysAmount) {
+        return averageSalary.setScale(2, RoundingMode.HALF_UP)
+                .divide(AVERAGE_DAYS_IN_MONTH, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(daysAmount));
     }
 
 }
